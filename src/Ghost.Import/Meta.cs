@@ -1,8 +1,14 @@
-﻿namespace Ghost.Import
+﻿using System;
+
+namespace Ghost.Import
 {
 	public class Meta
 	{
-		public long ExportedOn { get; set; }
-		public int Version { get; set; }
+		public Meta()
+		{
+			Version = "003";
+		}
+		public DateTime ExportedOn { get; set; }
+		public string Version { get; private set; }
 	}
 }

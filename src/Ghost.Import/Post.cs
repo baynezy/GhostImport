@@ -1,4 +1,6 @@
-﻿namespace Ghost.Import
+﻿using System;
+
+namespace Ghost.Import
 {
 	public class Post
 	{
@@ -9,17 +11,17 @@
 		public string Html { get; set; }
 		public string Image { get; set; }
 		public bool Featured { get; set; }
-		public PostType PostType { get; set; }
-		public PostStatus PostStatus { get; set; }
+		public PostType Type { get; set; }
+		public PostStatus Status { get; set; }
 		public Language Language { get; set; }
 		public string MetaTitle { get; set; }
 		public string MetaDescription { get; set; }
 		public int AuthorId { get; set; }
-		public long CreatedAt { get; set; }
+		public DateTime CreatedAt { get; set; }
 		public int CreatedBy { get; set; }
-		public long UpdatedAt { get; set; }
+		public DateTime UpdatedAt { get; set; }
 		public int UpdatedBy { get; set; }
-		public long PublishedAt { get; set; }
+		public DateTime PublishedAt { get; set; }
 		public int PublishedBy { get; set; }
 	}
 }
