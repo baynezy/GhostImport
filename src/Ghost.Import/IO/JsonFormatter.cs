@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Newtonsoft.Json;
 
 namespace Ghost.Import.IO
@@ -34,9 +33,9 @@ namespace Ghost.Import.IO
 									html = post.Html,
 									image = post.Image,
 									featured = post.Featured ? 1 : 0,
-									page = (post.Type == PostType.Page) ? 1 : 0,
-									status = CalculateStatus(post.Status),
-									language = CalculateLanguage(post.Language),
+									page = post.Type.ToValue(),
+									status = post.Status.ToString(),
+									language = post.Language.ToString(),
 									meta_title = post.MetaTitle,
 									meta_description = post.MetaDescription,
 									author_id = post.AuthorId,
@@ -55,36 +54,39 @@ namespace Ghost.Import.IO
 									   slug = tag.Slug,
 									   description = tag.Description
 								   },
-					post_tags = import.Data.PostTags,
-					users = import.Data.Users,
+					posts_tags = from postTag in import.Data.PostsTags
+									select new
+										{
+											tag_id = postTag.Key,
+											post_id = postTag.Value
+										},
+					users = from user in import.Data.Users
+								select new
+									{
+										id = user.Id,
+										name = user.Name,
+										slug = user.Slug,
+										email = user.Email,
+										image = user.Image,
+										cover = user.Cover,
+										bio = user.Bio,
+										website = user.Website,
+										location = user.Location,
+										accessibility = user.Accessibility,
+										status = user.Status.ToString(),
+										language = user.Language.ToString(),
+										meta_title = user.MetaTitle,
+										meta_description = user.MetaDescription,
+										last_login = user.LastLogin,
+										created_at = user.CreatedAt,
+										created_by = user.CreatedBy,
+										updated_at = user.UpdatedAt,
+										updated_by = user.UpdatedBy
+									},
 					roles_users = import.Data.UserRoles
 				}
 			};
 			return JsonConvert.SerializeObject(json);
-		}
-
-		private static string CalculateLanguage(Language language)
-		{
-			switch (language)
-			{
-				case Language.EnglishUk:
-					return "en_GB";
-				case Language.EnglishUs:
-					return "en_US";
-				default:
-					throw new Exception("Invalid Language");
-			}
-		}
-
-		private static string CalculateStatus(PostStatus status)
-		{
-			switch (status)
-			{
-				case PostStatus.Published:
-					return "published";
-				default:
-					return "draft";
-			}
 		}
 	}
 }

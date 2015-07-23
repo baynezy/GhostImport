@@ -48,7 +48,7 @@ namespace Ghost.Import.Test.IO
 			Assert.NotNull(parsed.data, "There should be a data attribute");
 			Assert.NotNull(parsed.data.posts, "There should be a data.posts attribute");
 			Assert.NotNull(parsed.data.tags, "There should be a data.tags attribute");
-			Assert.NotNull(parsed.data.post_tags, "There should be a data.post_tags attribute");
+			Assert.NotNull(parsed.data.posts_tags, "There should be a data.post_tags attribute");
 			Assert.NotNull(parsed.data.users, "There should be a data.users attribute");
 			Assert.NotNull(parsed.data.roles_users, "There should be a data.roles_users attribute");
 		}
@@ -184,7 +184,96 @@ namespace Ghost.Import.Test.IO
 			Assert.That((string)tag.description, Is.EqualTo("All about orchestration"), "tag description is incorrect");
 		}
 
-	    private static Tag CreateDummyTag()
+		[Test]
+		public void Process_WhenPassingImportWithPostTags_ThenShouldHaveBaseAttributes()
+		{
+			var import = CreateEmptyImport();
+			import.Data.PostsTags.Add(1, 1);
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var postTag = parsed.data.posts_tags[0];
+
+			Assert.That(postTag.tag_id, Is.Not.Null, "tag_id attribute should exist");
+			Assert.That(postTag.post_id, Is.Not.Null, "post_id attribute should exist");
+		}
+
+		[Test]
+		public void Process_WhenPassingImportWithPostTags_ThenShouldBePopulatedProperly()
+		{
+			var import = CreateEmptyImport();
+			import.Data.PostsTags.Add(1, 1);
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var postTag = parsed.data.posts_tags[0];
+
+			Assert.That((int)postTag.tag_id, Is.EqualTo(1), "tag id is incorrect");
+			Assert.That((int)postTag.post_id, Is.EqualTo(1), "post id is incorrect");
+		}
+
+		[Test]
+		public void Process_WhenPassingImportWithUsers_ThenShouldHaveBaseAttributes()
+		{
+			var import = CreateEmptyImport();
+			import.Data.Users.Add(CreateDummyUser());
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var user = parsed.data.users[0];
+
+			Assert.That(user.id, Is.Not.Null, "id attribute should exist");
+			Assert.That(user.name, Is.Not.Null, "name attribute should exist");
+			Assert.That(user.slug, Is.Not.Null, "slug attribute should exist");
+			Assert.That(user.email, Is.Not.Null, "enail attribute should exist");
+			Assert.That(user.image, Is.Not.Null, "image attribute should exist");
+			Assert.That(user.cover, Is.Not.Null, "cover attribute should exist");
+			Assert.That(user.bio, Is.Not.Null, "bio attribute should exist");
+			Assert.That(user.website, Is.Not.Null, "website attribute should exist");
+			Assert.That(user.location, Is.Not.Null, "location attribute should exist");
+			Assert.That(user.accessibility, Is.Not.Null, "accessibility attribute should exist");
+			Assert.That(user.status, Is.Not.Null, "status attribute should exist");
+			Assert.That(user.language, Is.Not.Null, "language attribute should exist");
+			Assert.That(user.meta_title, Is.Not.Null, "meta_title attribute should exist");
+			Assert.That(user.meta_description, Is.Not.Null, "meta_description attribute should exist");
+			Assert.That(user.last_login, Is.Not.Null, "last_login attribute should exist");
+			Assert.That(user.created_at, Is.Not.Null, "created_at attribute should exist");
+			Assert.That(user.created_by, Is.Not.Null, "created_by attribute should exist");
+			Assert.That(user.updated_at, Is.Not.Null, "updated_at attribute should exist");
+			Assert.That(user.updated_by, Is.Not.Null, "updated_by attribute should exist");
+		}
+
+		private static User CreateDummyUser()
+		{
+			var date = new DateTime(2014, 12, 13, 18, 36, 0);
+			return new User
+				{
+					Id = 1,
+					Name = "Simon Baynes",
+					Slug = "simon-baynes",
+					Email = "test@test.com",
+					Image = "image.jpg",
+					Cover = "cover.jpg",
+					Bio = "I know some things",
+					Website = "http://bayn.es",
+					Location = "London, UK",
+					Accessibility = "Accessible",
+					Status = UserStatus.Active,
+					Language = Language.EnglishUk,
+					MetaTitle = "Meta Title",
+					MetaDescription = "Meta Description",
+					LastLogin = date,
+					CreatedAt = date,
+					CreatedBy = 1,
+					UpdatedAt = date,
+					UpdatedBy = 1
+				};
+		}
+
+		private static Tag CreateDummyTag()
 	    {
 		    return new Tag
 			    {

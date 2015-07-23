@@ -1,4 +1,6 @@
-﻿namespace Ghost.Import
+﻿using System;
+
+namespace Ghost.Import
 {
 	public class User
 	{
@@ -16,10 +18,10 @@
 		public Language Language { get; set; }
 		public string MetaTitle { get; set; }
 		public string MetaDescription { get; set; }
-		public long LastLogin { get; set; }
-		public long CreatedAt { get; set; }
-		public long CreatedBy { get; set; }
-		public long UpdatedAt { get; set; }
-		public long UpdatedBy { get; set; }
+		public DateTime LastLogin { get; set; }
+		public DateTime CreatedAt { get; set; }
+		public int CreatedBy { get; set; }
+		public DateTime UpdatedAt { get; set; }
+		public int UpdatedBy { get; set; }
 	}
 }
