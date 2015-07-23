@@ -47,7 +47,14 @@ namespace Ghost.Import.IO
 									published_at = _epochTime.ConvertTo(post.PublishedAt),
 									published_by = post.PublishedBy
 								},
-					tags = import.Data.Tags,
+					tags = from tag in import.Data.Tags
+							   select new
+								   {
+									   id = tag.Id,
+									   name = tag.Name,
+									   slug = tag.Slug,
+									   description = tag.Description
+								   },
 					post_tags = import.Data.PostTags,
 					users = import.Data.Users,
 					roles_users = import.Data.UserRoles

@@ -7,6 +7,7 @@ namespace Ghost.Import
 		public Data()
 		{
 			Posts = new List<Post>();
+			Tags = new List<Tag>();
 		}
 		public IList<Post> Posts { get; set; }
 		public IList<Tag> Tags { get; set; }

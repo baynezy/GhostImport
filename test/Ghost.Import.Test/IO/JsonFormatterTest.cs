@@ -150,7 +150,52 @@ namespace Ghost.Import.Test.IO
 			Assert.That((int)post.published_by, Is.EqualTo(1), "post published by is incorrect");
 		}
 
-		public Post CreateDummyPost()
+        [Test]
+        public void Process_WhenPassedImportWithTags_ThenShouldHaveBaseAttributes()
+        {
+            var import = CreateEmptyImport();
+            import.Data.Tags.Add(CreateDummyTag());
+            var formatter = CreateFormatter();
+
+            var json = formatter.Process(import);
+            dynamic parsed = JObject.Parse(json);
+            var tag = parsed.data.tags[0];
+
+            Assert.That(tag.id, Is.Not.Null, "id attribute should exist");
+            Assert.That(tag.name, Is.Not.Null, "name attribute should exist");
+            Assert.That(tag.slug, Is.Not.Null, "slug attribute should exist");
+			Assert.That(tag.description, Is.Not.Null, "description attribute should exist");
+        }
+
+		[Test]
+		public void Process_WhenPassedImportWithTags_ThenShouldBePopulatedProperly()
+		{
+			var import = CreateEmptyImport();
+			import.Data.Tags.Add(CreateDummyTag());
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var tag = parsed.data.tags[0];
+
+			Assert.That((int)tag.id, Is.EqualTo(1), "tag id is incorrect");
+			Assert.That((string)tag.name, Is.EqualTo("Orchestration"), "tag name is incorrect");
+			Assert.That((string)tag.slug, Is.EqualTo("orchestration"), "tag slug is incorrect");
+			Assert.That((string)tag.description, Is.EqualTo("All about orchestration"), "tag description is incorrect");
+		}
+
+	    private static Tag CreateDummyTag()
+	    {
+		    return new Tag
+			    {
+				    Id = 1,
+					Name = "Orchestration",
+					Slug = "orchestration",
+					Description = "All about orchestration"
+			    };
+	    }
+
+	    public Post CreateDummyPost()
 		{
 			var createdAt = new DateTime(2014, 12, 13, 18, 36, 0);
 			return new Post
