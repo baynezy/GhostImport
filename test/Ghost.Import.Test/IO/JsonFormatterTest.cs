@@ -84,7 +84,7 @@ namespace Ghost.Import.Test.IO
 		}
 
 		[Test]
-		public void Process_WhenPassedImportWithPost_ThenShouldHaveBaseAttributes()
+		public void Process_WhenPassedImportWithPosts_ThenShouldHaveBaseAttributes()
 		{
 			var import = CreateEmptyImport();
 			import.Data.Posts.Add(CreateDummyPost());
@@ -116,7 +116,7 @@ namespace Ghost.Import.Test.IO
 		}
 
 		[Test]
-		public void Process_WhenPassedImportWithPost_ThenShouldBePopulatedProperly()
+		public void Process_WhenPassedImportWithPosts_ThenShouldBePopulatedProperly()
 		{
 			var import = CreateEmptyImport();
 			import.Data.Posts.Add(CreateDummyPost());
