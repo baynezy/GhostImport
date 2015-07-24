@@ -83,7 +83,12 @@ namespace Ghost.Import.IO
 										updated_at = _epochTime.ConvertTo(user.UpdatedAt),
 										updated_by = user.UpdatedBy
 									},
-					roles_users = import.Data.UserRoles
+					roles_users = from userRole in import.Data.UserRoles
+								  select new
+									  {
+										  user_id = userRole.Key,
+										  role_id = userRole.Value
+									  }
 				}
 			};
 			return JsonConvert.SerializeObject(json);

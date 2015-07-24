@@ -281,6 +281,21 @@ namespace Ghost.Import.Test.IO
 			Assert.That((int)user.updated_by, Is.EqualTo(1), "updated_by is incorrect");
 		}
 
+		[Test]
+		public void Process_WhenPassingImportWithRolesUsers_ThenShouldHaveBaseAttributes()
+		{
+			var import = CreateEmptyImport();
+			import.Data.UserRoles.Add(1, 1);
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var rolesUsers = parsed.data.roles_users[0];
+
+			Assert.That(rolesUsers.user_id, Is.Not.Null, "user_id attribute should exist");
+			Assert.That(rolesUsers.role_id, Is.Not.Null, "role_id attribute should exist");
+		}
+
 		private static User CreateDummyUser()
 		{
 			var date = new DateTime(2014, 12, 13, 18, 36, 0);
