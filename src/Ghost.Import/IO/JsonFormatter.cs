@@ -77,10 +77,10 @@ namespace Ghost.Import.IO
 										language = user.Language.ToString(),
 										meta_title = user.MetaTitle,
 										meta_description = user.MetaDescription,
-										last_login = user.LastLogin,
-										created_at = user.CreatedAt,
+										last_login = _epochTime.ConvertTo(user.LastLogin),
+										created_at = _epochTime.ConvertTo(user.CreatedAt),
 										created_by = user.CreatedBy,
-										updated_at = user.UpdatedAt,
+										updated_at = _epochTime.ConvertTo(user.UpdatedAt),
 										updated_by = user.UpdatedBy
 									},
 					roles_users = import.Data.UserRoles

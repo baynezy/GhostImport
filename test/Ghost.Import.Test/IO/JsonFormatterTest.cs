@@ -246,6 +246,41 @@ namespace Ghost.Import.Test.IO
 			Assert.That(user.updated_by, Is.Not.Null, "updated_by attribute should exist");
 		}
 
+		[Test]
+		public void Process_WhenPassingImportWithUsers_ThenShouldBePopulatedCorrectly()
+		{
+			var import = CreateEmptyImport();
+			import.Data.Users.Add(CreateDummyUser());
+			var epochTime = new Mock<IEpochTime>();
+			epochTime.Setup(m => m.ConvertTo(It.IsAny<DateTime>())).ReturnsInOrder(0, 1418495760000, 1528599960000, 1628599960000);
+
+			var formatter = CreateFormatter(epochTime.Object);
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var user = parsed.data.users[0];
+
+			Assert.That((int)user.id, Is.EqualTo(1), "id is incorrect");
+			Assert.That((string)user.name, Is.EqualTo("Simon Baynes"), "name is incorrect");
+			Assert.That((string)user.slug, Is.EqualTo("simon-baynes"), "slug is incorrect");
+			Assert.That((string)user.email, Is.EqualTo("test@test.com"), "email is incorrect");
+			Assert.That((string)user.image, Is.EqualTo("image.jpg"), "image is incorrect");
+			Assert.That((string)user.cover, Is.EqualTo("cover.jpg"), "cover is incorrect");
+			Assert.That((string)user.bio, Is.EqualTo("I know some things"), "bio is incorrect");
+			Assert.That((string)user.website, Is.EqualTo("http://bayn.es"), "website is incorrect");
+			Assert.That((string)user.location, Is.EqualTo("London, UK"), "location is incorrect");
+			Assert.That((string)user.accessibility, Is.EqualTo("Accessible"), "accessibility is incorrect");
+			Assert.That((string)user.status, Is.EqualTo(UserStatus.Active.ToString()), "status is incorrect");
+			Assert.That((string)user.language, Is.EqualTo(Language.EnglishUk.ToString()), "language is incorrect");
+			Assert.That((string)user.meta_title, Is.EqualTo("Meta Title"), "meta_title is incorrect");
+			Assert.That((string)user.meta_description, Is.EqualTo("Meta Description"), "meta_description is incorrect");
+			Assert.That((long)user.last_login, Is.EqualTo(1418495760000), "last_login is incorrect");
+			Assert.That((long)user.created_at, Is.EqualTo(1528599960000), "created_at is incorrect");
+			Assert.That((int)user.created_by, Is.EqualTo(1), "created_by is incorrect");
+			Assert.That((long)user.updated_at, Is.EqualTo(1628599960000), "updated_at is incorrect");
+			Assert.That((int)user.updated_by, Is.EqualTo(1), "updated_by is incorrect");
+		}
+
 		private static User CreateDummyUser()
 		{
 			var date = new DateTime(2014, 12, 13, 18, 36, 0);
