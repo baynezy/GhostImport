@@ -7,6 +7,7 @@ namespace Ghost.Import
 		public Meta()
 		{
 			Version = "003";
+			ExportedOn = DateTime.Now;
 		}
 		public DateTime ExportedOn { get; set; }
 		public string Version { get; private set; }
