@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/baynezy/GhostImport</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Intial 1.0.0 release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Blogging Ghost</tags>
+  </metadata>
+</package>
