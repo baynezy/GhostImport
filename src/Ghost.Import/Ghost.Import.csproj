@@ -48,6 +48,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="IO\EpochTime.cs" />
+    <Compile Include="IO\FileOperation.cs" />
     <Compile Include="IO\GhostExporter.cs" />
     <Compile Include="IO\IEpochTime.cs" />
     <Compile Include="IO\IFileOperation.cs" />
