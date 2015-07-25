@@ -62,6 +62,7 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Ghost.Import.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
