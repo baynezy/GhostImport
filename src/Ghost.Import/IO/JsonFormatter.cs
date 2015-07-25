@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Ghost.Import.IO
@@ -57,8 +58,8 @@ namespace Ghost.Import.IO
 					posts_tags = from postTag in import.Data.PostsTags
 									select new
 										{
-											tag_id = postTag.Key,
-											post_id = postTag.Value
+											tag_id = postTag.Item1,
+											post_id = postTag.Item2
 										},
 					users = from user in import.Data.Users
 								select new
@@ -77,7 +78,7 @@ namespace Ghost.Import.IO
 										language = user.Language.ToString(),
 										meta_title = user.MetaTitle,
 										meta_description = user.MetaDescription,
-										last_login = _epochTime.ConvertTo(user.LastLogin),
+										last_login = FormatLastLogin(user.LastLogin),
 										created_at = _epochTime.ConvertTo(user.CreatedAt),
 										created_by = user.CreatedBy,
 										updated_at = _epochTime.ConvertTo(user.UpdatedAt),
@@ -86,12 +87,21 @@ namespace Ghost.Import.IO
 					roles_users = from userRole in import.Data.UserRoles
 								  select new
 									  {
-										  user_id = userRole.Key,
-										  role_id = userRole.Value
+										  user_id = userRole.Item1,
+										  role_id = userRole.Item2
 									  }
 				}
 			};
 			return JsonConvert.SerializeObject(json);
+		}
+
+		private long? FormatLastLogin(DateTime? lastLogin)
+		{
+			if (lastLogin == null)
+			{
+				return null;
+			}
+			return _epochTime.ConvertTo((DateTime) lastLogin);
 		}
 	}
 }

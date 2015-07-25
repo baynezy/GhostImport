@@ -18,7 +18,7 @@ namespace Ghost.Import
 		public Language Language { get; set; }
 		public string MetaTitle { get; set; }
 		public string MetaDescription { get; set; }
-		public DateTime LastLogin { get; set; }
+		public DateTime? LastLogin { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public int CreatedBy { get; set; }
 		public DateTime UpdatedAt { get; set; }

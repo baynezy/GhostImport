@@ -188,7 +188,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithPostTags_ThenShouldHaveBaseAttributes()
 		{
 			var import = CreateEmptyImport();
-			import.Data.PostsTags.Add(1, 1);
+			import.Data.PostsTags.Add(new Tuple<int, int>(1,1));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -203,7 +203,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithPostTags_ThenShouldBePopulatedProperly()
 		{
 			var import = CreateEmptyImport();
-			import.Data.PostsTags.Add(1, 1);
+			import.Data.PostsTags.Add(new Tuple<int, int>(1,1));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -285,7 +285,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithRolesUsers_ThenShouldHaveBaseAttributes()
 		{
 			var import = CreateEmptyImport();
-			import.Data.UserRoles.Add(1, 1);
+			import.Data.UserRoles.Add(new Tuple<int, int>(1,1));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -294,6 +294,23 @@ namespace Ghost.Import.Test.IO
 
 			Assert.That(rolesUsers.user_id, Is.Not.Null, "user_id attribute should exist");
 			Assert.That(rolesUsers.role_id, Is.Not.Null, "role_id attribute should exist");
+		}
+
+		[Test]
+		public void Process_WhenPassingImportWithAUserWithANullLastLogin_ThenSetLastLoginToNull()
+		{
+			var import = CreateEmptyImport();
+			var dummyUser = CreateDummyUser();
+			dummyUser.LastLogin = null;
+			import.Data.Users.Add(dummyUser);
+
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var user = parsed.data.users[0];
+
+			Assert.That((long?)user.last_login, Is.Null);
 		}
 
 		private static User CreateDummyUser()
