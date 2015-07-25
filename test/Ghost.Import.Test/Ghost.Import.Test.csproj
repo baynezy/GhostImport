@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\EpochTimeTest.cs" />
+    <Compile Include="IO\GhostExporterTest.cs" />
     <Compile Include="IO\JsonFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

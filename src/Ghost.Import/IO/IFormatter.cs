@@ -2,5 +2,6 @@
 {
 	public interface IFormatter
 	{
+		string Process(Import import);
 	}
 }
