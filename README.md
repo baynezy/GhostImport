@@ -60,9 +60,9 @@ https://github.com/TryGhost/Ghost/wiki/Import-format
 						},
 					PostsTags =
 						{
-							new Tuple<int, int>(3,5),
-							new Tuple<int, int>(3,2),
-							new Tuple<int, int>(4,24)
+							new PostTag(3,5),
+							new PostTag(3,2),
+							new PostTag(4,24)
 						},
 					Users =
 						{
@@ -91,7 +91,7 @@ https://github.com/TryGhost/Ghost/wiki/Import-format
 						},
 					UserRoles =
 						{
-							new Tuple<int, int>(2,3)
+							new UserRole(2,3)
 						}
 				}
 		};

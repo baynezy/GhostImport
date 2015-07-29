@@ -188,7 +188,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithPostTags_ThenShouldHaveBaseAttributes()
 		{
 			var import = CreateEmptyImport();
-			import.Data.PostsTags.Add(new Tuple<int, int>(1,1));
+			import.Data.PostsTags.Add(new PostTag(1,2));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -203,7 +203,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithPostTags_ThenShouldBePopulatedProperly()
 		{
 			var import = CreateEmptyImport();
-			import.Data.PostsTags.Add(new Tuple<int, int>(1,1));
+			import.Data.PostsTags.Add(new PostTag(1,2));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -211,7 +211,7 @@ namespace Ghost.Import.Test.IO
 			var postTag = parsed.data.posts_tags[0];
 
 			Assert.That((int)postTag.tag_id, Is.EqualTo(1), "tag id is incorrect");
-			Assert.That((int)postTag.post_id, Is.EqualTo(1), "post id is incorrect");
+			Assert.That((int)postTag.post_id, Is.EqualTo(2), "post id is incorrect");
 		}
 
 		[Test]
@@ -285,7 +285,7 @@ namespace Ghost.Import.Test.IO
 		public void Process_WhenPassingImportWithRolesUsers_ThenShouldHaveBaseAttributes()
 		{
 			var import = CreateEmptyImport();
-			import.Data.UserRoles.Add(new Tuple<int, int>(1,1));
+			import.Data.UserRoles.Add(new UserRole(1,2));
 			var formatter = CreateFormatter();
 
 			var json = formatter.Process(import);
@@ -294,6 +294,21 @@ namespace Ghost.Import.Test.IO
 
 			Assert.That(rolesUsers.user_id, Is.Not.Null, "user_id attribute should exist");
 			Assert.That(rolesUsers.role_id, Is.Not.Null, "role_id attribute should exist");
+		}
+
+		[Test]
+		public void Process_WhenPassingImportWithRolesUsers_ThenShouldBePopulatedCorrectly()
+		{
+			var import = CreateEmptyImport();
+			import.Data.UserRoles.Add(new UserRole(1, 2));
+			var formatter = CreateFormatter();
+
+			var json = formatter.Process(import);
+			dynamic parsed = JObject.Parse(json);
+			var rolesUsers = parsed.data.roles_users[0];
+
+			Assert.That((int)rolesUsers.user_id, Is.EqualTo(1), "user_id is incorrect");
+			Assert.That((int)rolesUsers.role_id, Is.EqualTo(2), "role_id is incorrect");
 		}
 
 		[Test]
