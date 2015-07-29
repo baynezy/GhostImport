@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/baynezy/GhostImport</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Intial 1.0.0 release.</releaseNotes>
+    <releaseNotes>Updated API to have more clarity.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Blogging Ghost</tags>
   </metadata>
