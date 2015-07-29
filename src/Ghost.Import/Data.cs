@@ -9,15 +9,15 @@ namespace Ghost.Import
 		{
 			Posts = new List<Post>();
 			Tags = new List<Tag>();
-			PostsTags = new List<Tuple<int, int>>();
+			PostsTags = new List<PostTag>();
 			Users = new List<User>();
-			UserRoles = new List<Tuple<int, int>>();
+			UserRoles = new List<UserRole>();
 		}
 		public IList<Post> Posts { get; set; }
 		public IList<Tag> Tags { get; set; }
-		public IList<Tuple<int,int>> PostsTags { get; set; }
+		public IList<PostTag> PostsTags { get; set; }
 		public IList<User> Users { get; set; }
-		public IList<Tuple<int, int>> UserRoles { get; set; }
+		public IList<UserRole> UserRoles { get; set; }
 
 	}
 }

@@ -58,8 +58,8 @@ namespace Ghost.Import.IO
 					posts_tags = from postTag in import.Data.PostsTags
 									select new
 										{
-											tag_id = postTag.Item1,
-											post_id = postTag.Item2
+											tag_id = postTag.TagId,
+											post_id = postTag.PostId
 										},
 					users = from user in import.Data.Users
 								select new
@@ -87,8 +87,8 @@ namespace Ghost.Import.IO
 					roles_users = from userRole in import.Data.UserRoles
 								  select new
 									  {
-										  user_id = userRole.Item1,
-										  role_id = userRole.Item2
+										  user_id = userRole.UserId,
+										  role_id = userRole.RoleId
 									  }
 				}
 			};
