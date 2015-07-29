@@ -4,7 +4,11 @@ This is a library to help you create the import JSON for the Ghost Blogging Plat
 
 https://github.com/TryGhost/Ghost/wiki/Import-format
 
-[![NuGet version](https://badge.fury.io/nu/GhostImport.svg)](http://badge.fury.io/nu/GhostImport) [![Build status](https://ci.appveyor.com/api/projects/status/6qnsyy43p4arrjmc?svg=true)](https://ci.appveyor.com/project/baynezy/ghostimport)
+[![NuGet version](https://badge.fury.io/nu/Ghost.Import.svg)](http://badge.fury.io/nu/Ghost.Import) [![Build status](https://ci.appveyor.com/api/projects/status/6qnsyy43p4arrjmc?svg=true)](https://ci.appveyor.com/project/baynezy/ghostimport)
+
+## Installing via NuGet
+
+	PM> Install-Package Ghost.Import
 
 ## Usage
 
