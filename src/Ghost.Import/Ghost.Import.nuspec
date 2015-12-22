@@ -12,5 +12,8 @@
     <releaseNotes>Updated API to have more clarity.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Blogging Ghost</tags>
+		<dependencies>
+			<dependency id="Newtonsoft.Json" version="6.0.6"></dependency>
+		</dependencies>
   </metadata>
 </package>

@@ -2,11 +2,24 @@
 
 This is a library to help you create the import JSON for the Ghost Blogging Platform. Details of the format required can be found here.
 
-https://github.com/TryGhost/Ghost/wiki/Import-format
+[https://github.com/TryGhost/Ghost/wiki/Import-format]([https://github.com/TryGhost/Ghost/wiki/Import-format)
 
-[![NuGet version](https://badge.fury.io/nu/Ghost.Import.svg)](http://badge.fury.io/nu/Ghost.Import) [![Build status](https://ci.appveyor.com/api/projects/status/6qnsyy43p4arrjmc?svg=true)](https://ci.appveyor.com/project/baynezy/ghostimport)
+## Build Status
+
+<table>
+    <tr>
+        <th>master</th>
+		<td><a href="https://ci.appveyor.com/project/baynezy/ghostimport"><img src="https://ci.appveyor.com/api/projects/status/6qnsyy43p4arrjmc/branch/master?svg=true" alt="master" title="master" /></a></td>
+    </tr>
+    <tr>
+        <th>develop</th>
+		<td><a href="https://ci.appveyor.com/project/baynezy/ghostimport"><img src="https://ci.appveyor.com/api/projects/status/6qnsyy43p4arrjmc/branch/develop?svg=true" alt="develop" title="develop" /></a></td>
+    </tr>
+</table>
 
 ## Installing via NuGet
+
+[![NuGet version](https://badge.fury.io/nu/Ghost.Import.svg)](http://badge.fury.io/nu/Ghost.Import)
 
 	PM> Install-Package Ghost.Import
 
